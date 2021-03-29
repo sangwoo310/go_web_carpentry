@@ -3,16 +3,15 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"go_web_carpentry/handler"
 	"net/http"
 
 )
 
-type StructRouter struct {
-	option bool
+type TStructRouter struct {
+	handlers map[string]map[string]http.HandlerFunc
 }
 
-func Router() *echo.Echo {
+func (r *TStructRouter)TRouter() *echo.Echo {
 	// ehco.New() 를 통해 *Echo 리턴 및 객체 생성
 	e := echo.New()
 
@@ -32,17 +31,6 @@ func Router() *echo.Echo {
 		return c.String(http.StatusOK, "Server is healthy!")
 	})
 
-	e.GET("/*", func(c echo.Context) error {
-		return c.String(http.StatusOK, "This is Index Page")
-	})
+	return nil
 
-	//test := e.Group("/test")
-
-	login := e.Group("/login")
-	{
-		login.GET("/*", handler.Login)
-		//login.GET("/*", handler.Login)
-	}
-
-	return e
 }

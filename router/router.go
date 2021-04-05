@@ -5,7 +5,6 @@ import (
 	"github.com/labstack/echo/middleware"
 	"go_web_carpentry/handler"
 	"net/http"
-
 )
 
 type StructRouter struct {
@@ -36,7 +35,10 @@ func Router() *echo.Echo {
 		return c.String(http.StatusOK, "This is Index Page")
 	})
 
-	//test := e.Group("/test")
+	test := e.Group("/test")
+	{
+		test.GET("/test", handler.Rendering)
+	}
 
 	login := e.Group("/login")
 	{
